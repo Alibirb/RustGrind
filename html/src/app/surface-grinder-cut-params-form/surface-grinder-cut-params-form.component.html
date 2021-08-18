@@ -1,0 +1,61 @@
+<div class="container">
+	<form (ngSubmit)="onSubmit()" #surfaceGrinderCutParamsForm="ngForm">
+		<div class="form-group">
+			<label for="depth_of_cut">Z Depth of cut</label>
+			<input type="number" class="form-control" id="depth_of_cut"
+				required
+				step="0.0001"
+				min="0.0"
+				[(ngModel)]="model.depth_of_cut" name="depth_of_cut"
+				#depth_of_cut="ngModel">
+			<div [hidden]="depth_of_cut.valid || depth_of_cut.pristine"
+				class="alert alert-danger">
+				Depth of cut is required
+			</div> 
+		</div>
+
+		<div class="form-group">
+			<label for="feed_per_pass">Y Feed per pass</label>
+			<input type="number" class="form-control" id="feed_per_pass"
+				required
+				step="0.0001"
+				min="0.0"
+				[(ngModel)]="model.feed_per_pass" name="feed_per_pass"
+				#feed_per_pass="ngModel">
+			<div [hidden]="feed_per_pass.valid || feed_per_pass.pristine"
+				class="alert alert-danger">
+				Feed per pass is required
+			</div> 
+		</div>
+
+		<div class="form-group">
+			<label for="stroke_speed">Stroke speed</label>
+			<input type="number" class="form-control" id="stroke_speed"
+				required
+				min="0.1"
+				[(ngModel)]="model.stroke_speed" name="stroke_speed"
+				#stroke_speed="ngModel">
+			<div [hidden]="stroke_speed.valid || stroke_speed.pristine"
+				class="alert alert-danger">
+				Stroke speed is required
+			</div> 
+		</div>
+
+		<div class="form-group">
+			<label for="total_depth">Total depth</label>
+			<input type="number" class="form-control" id="total_depth"
+				required
+				step="0.0001"
+				min="0.0"
+				[(ngModel)]="model.total_depth" name="total_depth"
+				#total_depth="ngModel">
+			<div [hidden]="total_depth.valid || total_depth.pristine"
+				class="alert alert-danger">
+				Total depth is required
+			</div> 
+		</div>
+
+		<!-- FIXME: should probably have confirmation dialog -->
+		<button type="submit" class="btn btn-success" [disabled]="!surfaceGrinderCutParamsForm.form.valid">Start cut</button>
+	</form>
+</div>

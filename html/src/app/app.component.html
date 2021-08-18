@@ -1,0 +1,30 @@
+<h1>{{title}}</h1>
+
+<app-move-axis-button [axis]="Axis.X" [distance]="-10"></app-move-axis-button>
+<app-move-axis-button [axis]="Axis.X" [distance]="-2"></app-move-axis-button>
+<app-move-axis-button [axis]="Axis.X" [distance]="2"></app-move-axis-button>
+<app-move-axis-button [axis]="Axis.X" [distance]="10"></app-move-axis-button>
+
+<br/>
+
+<app-move-axis-button [axis]="Axis.Y" [distance]="-10"></app-move-axis-button>
+<app-move-axis-button [axis]="Axis.Y" [distance]="-2"></app-move-axis-button>
+<app-move-axis-button [axis]="Axis.Y" [distance]="2"></app-move-axis-button>
+<app-move-axis-button [axis]="Axis.Y" [distance]="10"></app-move-axis-button>
+
+<br/>
+
+<app-move-axis-button [axis]="Axis.Z" [distance]="-10"></app-move-axis-button>
+<app-move-axis-button [axis]="Axis.Z" [distance]="-2"></app-move-axis-button>
+<app-move-axis-button [axis]="Axis.Z" [distance]="2"></app-move-axis-button>
+<app-move-axis-button [axis]="Axis.Z" [distance]="10"></app-move-axis-button>
+
+<br/>
+
+<app-stop-button></app-stop-button>
+
+<br/>
+
+<app-surface-grinder-cut-params-form></app-surface-grinder-cut-params-form>
+
+<router-outlet></router-outlet>

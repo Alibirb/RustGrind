@@ -1,0 +1,34 @@
+#!/bin/bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+set -o xtrace
+
+readonly TARGET_HOST=pi@192.168.1.142
+readonly TARGET_ARCH=armv7-unknown-linux-gnueabihf
+
+readonly TARGET_BASE_PATH=/home/pi/rust-grind
+
+readonly SOURCE_PATH=./src
+readonly TARGET_SOURCE_PATH=${TARGET_BASE_PATH}/src
+
+readonly TARGET_BIN_PATH=${TARGET_BASE_PATH}/target/release/rust-grind
+readonly SOURCE_BIN_PATH=./target/${TARGET_ARCH}/release/rust-grind
+
+readonly TARGET_HTML_PATH=${TARGET_BASE_PATH}/html/dist/rust-grind
+readonly SOURCE_HTML_PATH=./html/dist/rust-grind
+
+cd html
+ng build
+cd -
+
+# Compile on raspberry pi:
+rsync -r Cargo.toml ${TARGET_HOST}:${TARGET_BASE_PATH}/Cargo.toml
+rsync -r ./linux-embedded-hal ${TARGET_HOST}:${TARGET_BASE_PATH}
+rsync -r ${SOURCE_PATH} ${TARGET_HOST}:${TARGET_BASE_PATH}
+rsync -r ${SOURCE_HTML_PATH} ${TARGET_HOST}:${TARGET_BASE_PATH}/html/dist/
+ssh -t ${TARGET_HOST} "source ~/.profile && cd ${TARGET_BASE_PATH} && cargo build --release"
+
+
+ssh -t ${TARGET_HOST} "cd ${TARGET_BASE_PATH} && ${TARGET_BIN_PATH}"

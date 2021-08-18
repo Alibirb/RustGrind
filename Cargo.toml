@@ -1,0 +1,23 @@
+[package]
+name = "rust-grind"
+version = "0.1.0"
+edition = "2018"
+
+[dependencies]
+embedded-hal = "1.0.0-alpha.0"
+fixed = "1.0.0"
+gpio-cdev = "0.4"
+linux-embedded-hal = { version = "0.4.0-alpha.0", features = ["sysfs_gpio", "gpio_cdev"] }
+nix = "0.22"
+quicli = "0.4"
+ramp-maker = { version = "0.2.0", features = ["std"] }
+rocket = "0.4.10"
+rocket_contrib = { version = "0.4.10", features = ["json"] }
+serde = "1.0"
+serde_derive = "1.0"
+serde_json = "1.0"
+serde_yaml = "0.8"
+stepper = "0.5.0"
+strum = "0.21"
+strum_macros = "0.21"
+typenum = "1.13.0"
