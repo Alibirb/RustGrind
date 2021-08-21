@@ -179,7 +179,7 @@ impl SurfaceGrinderCutController {
 			Message::GoToPositionMsgType(_) => self.forward_to_motor_control(msg),
 			Message::MoveAxisRelMsgType(_) => self.forward_to_motor_control(msg),
 			Message::MovementCompleteMsgType(mc_msg) => self.handle_movement_complete(mc_msg),
-			Message::SpindleControlMsgType(_) => {},
+			Message::SpindleControlMsgType(_) => self.forward_to_motor_control(msg),
 			Message::StartSurfaceGrinderCutMsgType(cut_params) => self.start_cut(cut_params),
 			Message::StopMsgType() => self.stop(),
 		};

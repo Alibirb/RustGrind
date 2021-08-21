@@ -18,6 +18,7 @@ import { SurfaceGrinderCutParams } from './surface-grinder-cut-params';
 export class MotorControlService {
 
 	private moveAxisRelUrl = "api/moveAxisRel";
+	private spindlePowerUrl = "api/spindlePower";
 	private startSurfaceGrinderCutUrl = "api/startSurfaceGrinderCut";
 	private stopUrl = "api/stop";
 
@@ -32,6 +33,13 @@ export class MotorControlService {
 		return this.http.post<MoveAxisRelMsg>(this.moveAxisRelUrl, msg, this.httpOptions)
 			.pipe(
 				catchError(this.handleError('moveAxisRel', msg))
+			);
+	}
+
+	setSpindlePower(on: boolean) : Observable<any> {
+		return this.http.post<boolean>(this.spindlePowerUrl, on, this.httpOptions)
+			.pipe(
+				catchError(this.handleError('setSpindlePower', on))
 			);
 	}
 

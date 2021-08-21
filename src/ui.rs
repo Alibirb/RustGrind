@@ -1,5 +1,6 @@
 use crate::messages::Message;
 use crate::messages::MoveAxisRelMsg;
+use crate::messages::SpindleControlMsg;
 use crate::surface_grinder_cut_controller::SurfaceGrinderCutParams;
 
 use std::sync::mpsc::Sender;
@@ -15,6 +16,11 @@ use rocket::State;
 #[post("/", format = "json", data = "<message>")]
 fn order_move_axis_rel(message: Json<MoveAxisRelMsg>, sender: State<Mutex<Sender<Message>>>) {
 	sender.lock().unwrap().send(Message::MoveAxisRelMsgType(message.into_inner()));
+}
+
+#[post("/", format = "json", data = "<message>")]
+fn order_spindle_power(message: Json<bool>, sender: State<Mutex<Sender<Message>>>) {
+	sender.lock().unwrap().send(Message::SpindleControlMsgType(SpindleControlMsg{on: message.into_inner()}));
 }
 
 #[post("/", format = "json", data = "<message>")]
@@ -36,6 +42,7 @@ pub fn init(sender: Sender<Message>) {
 			.manage(mutex)
 			.mount("/", StaticFiles::from("html/dist/rust-grind"))
 			.mount("/api/moveAxisRel", routes![order_move_axis_rel])
+			.mount("/api/spindlePower", routes![order_spindle_power])
 			.mount("/api/startSurfaceGrinderCut", routes![order_start_surface_grinder_cut])
 			.mount("/api/stop", routes![order_stop])
 			.launch();
