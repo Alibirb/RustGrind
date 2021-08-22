@@ -101,7 +101,9 @@ impl EndstopChecker {
 						let h = &mut evt_handles[i];
 						if revts.contains(PollEventFlags::POLLIN) {
 							let value = h.get_value().unwrap();
-							// TODO: stuff
+							// Retrieve and clear the event
+							// We don't need the event object itself, but it won't clear until we take it.
+							h.get_event().unwrap();
 							let endstop = self.line_to_endstop_id.get(&h.line().offset()).unwrap();
 							for sender in &self.msg_senders {
 								sender.send(Message::EndstopHitMsgType(EndstopHitMsg{endstop: *endstop, value: (value != 0)}));
