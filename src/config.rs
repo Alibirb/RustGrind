@@ -48,6 +48,7 @@ pub struct RustGrindConfig {
 
 
 /// TODO: need to synchronize config
+#[derive(Clone)]
 pub struct ConfigClient {
 	pub config: RustGrindConfig,
 }

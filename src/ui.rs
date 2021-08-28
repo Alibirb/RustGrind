@@ -1,7 +1,7 @@
 use crate::messages::Message;
 use crate::messages::MoveAxisRelMsg;
 use crate::messages::SpindleControlMsg;
-use crate::surface_grinder_cut_controller::SurfaceGrinderCutParams;
+use crate::operation_controllers::SurfaceGrinderCutParams;
 
 use std::sync::mpsc::Sender;
 use std::sync::Mutex;

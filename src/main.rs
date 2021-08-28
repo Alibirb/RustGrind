@@ -10,8 +10,8 @@ mod config;
 mod endstop_checker;
 mod messages;
 mod motor_control;
+mod operation_controllers;
 mod pins;
-mod surface_grinder_cut_controller;
 mod ui;
 
 use std::sync::mpsc;
@@ -34,7 +34,7 @@ fn main() -> ! {
 	ui::init(main_thread_sender.clone());
 	motor_control::init(initial_config.clone(), motor_control_receiver, main_thread_sender.clone());
 	endstop_checker::init(initial_config.clone(), vec![motor_control_sender.clone(), main_thread_sender.clone()]);
-	surface_grinder_cut_controller::init(initial_config.clone(), main_thread_receiver, motor_control_sender.clone());
+	operation_controllers::init(initial_config.clone(), main_thread_receiver, motor_control_sender.clone());
 
 	loop {
 		thread::sleep(Duration::from_millis(1000));

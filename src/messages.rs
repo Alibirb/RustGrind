@@ -1,6 +1,6 @@
 use crate::common::Axis;
 use crate::common::EndstopIdentifier;
-use crate::surface_grinder_cut_controller::SurfaceGrinderCutParams;
+use crate::operation_controllers::SurfaceGrinderCutParams;
 
 
 

@@ -15,6 +15,7 @@ use std::thread;
 
 
 
+#[derive(Clone)]
 pub struct EndstopStatusClient {
 	endstop_hit: HashMap<EndstopIdentifier, bool>,
 }

@@ -25,6 +25,7 @@ pub enum AxisEnd {
 
 
 #[derive(Copy, Clone)]
+#[derive(Debug)]
 #[derive(PartialEq, Eq, Hash)]
 #[derive(Serialize, Deserialize)]
 pub struct EndstopIdentifier {

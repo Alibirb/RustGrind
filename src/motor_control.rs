@@ -34,6 +34,7 @@ use linux_embedded_hal::SysTimer;
 
 
 
+#[derive(Clone)]
 pub struct CurrentPositionClient {
 	last_msg: CurrentPositionMsg,
 }
