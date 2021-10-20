@@ -12,6 +12,7 @@ pub enum Message {
 	MoveAxisRelMsgType(MoveAxisRelMsg),
 	MovementCompleteMsgType(MovementCompleteMsg),
 	SpindleControlMsgType(SpindleControlMsg),
+	StartHomingMsgType(),
 	StartSurfaceGrinderCutMsgType(SurfaceGrinderCutParams),
 	StopMsgType(),
 }

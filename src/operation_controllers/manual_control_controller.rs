@@ -1,3 +1,4 @@
+use super::homing_controller::HomingParams;
 use super::OperationController;
 use super::OperationControllerData;
 use super::OperationParameters;
@@ -48,6 +49,7 @@ impl OperationController for ManualControlController {
 			Message::SpindleControlMsgType(_) => self.send_to_motor_control(msg),
 			Message::StopMsgType() => self.stop(),
 
+			Message::StartHomingMsgType() => self.change_controller(Box::new(HomingParams{})),
 			Message::StartSurfaceGrinderCutMsgType(cut_params) => self.change_controller(Box::new(cut_params)),
 
 			_ => {}

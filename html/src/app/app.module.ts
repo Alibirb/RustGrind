@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { MoveAxisButtonComponent } from './move-axis-button/move-axis-button.component';
 import { OnOffPipe } from './on-off.pipe';
 import { SpindleControlButtonComponent } from './spindle-control-button/spindle-control-button.component';
+import { StartHomingButtonComponent } from './start-homing-button/start-homing-button.component';
 import { StopButtonComponent } from './stop-button/stop-button.component';
 import { SurfaceGrinderCutParamsFormComponent } from './surface-grinder-cut-params-form/surface-grinder-cut-params-form.component';
 
@@ -18,6 +19,7 @@ import { SurfaceGrinderCutParamsFormComponent } from './surface-grinder-cut-para
 		MoveAxisButtonComponent,
 		OnOffPipe,
 		SpindleControlButtonComponent,
+		StartHomingButtonComponent,
 		StopButtonComponent,
 		SurfaceGrinderCutParamsFormComponent,
 	],

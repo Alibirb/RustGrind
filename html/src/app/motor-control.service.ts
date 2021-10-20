@@ -19,6 +19,7 @@ export class MotorControlService {
 
 	private moveAxisRelUrl = "api/moveAxisRel";
 	private spindlePowerUrl = "api/spindlePower";
+	private startHomingUrl = "api/startHoming";
 	private startSurfaceGrinderCutUrl = "api/startSurfaceGrinderCut";
 	private stopUrl = "api/stop";
 
@@ -40,6 +41,14 @@ export class MotorControlService {
 		return this.http.post<boolean>(this.spindlePowerUrl, on, this.httpOptions)
 			.pipe(
 				catchError(this.handleError('setSpindlePower', on))
+			);
+	}
+
+	startHoming() : Observable<any> {
+		let msg = null;
+		return this.http.post(this.startHomingUrl, msg, this.httpOptions)
+			.pipe(
+				catchError(this.handleError('startHoming', msg))
 			);
 	}
 

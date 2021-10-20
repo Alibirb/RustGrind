@@ -327,9 +327,7 @@ impl MotorsControl {
 			Message::SpindleControlMsgType(sc_msg) => self.set_spindle_on(sc_msg.on).unwrap(),
 			Message::StopMsgType() => self.stop_all(),
 
-			Message::CurrentPositionMsgType(_) => {},
-			Message::MovementCompleteMsgType(_) => {},
-			Message::StartSurfaceGrinderCutMsgType(_) => {},
+			_ => {},
 		};
 	}
 

@@ -1,3 +1,4 @@
+mod homing_controller;
 mod manual_control_controller;
 mod operation_controller_data;
 mod operation_controller_manager;

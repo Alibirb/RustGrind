@@ -23,6 +23,11 @@ fn order_spindle_power(message: Json<bool>, sender: State<Mutex<Sender<Message>>
 	sender.lock().unwrap().send(Message::SpindleControlMsgType(SpindleControlMsg{on: message.into_inner()}));
 }
 
+#[post("/", format = "json")]
+fn order_start_homing(sender: State<Mutex<Sender<Message>>>) {
+	sender.lock().unwrap().send(Message::StartHomingMsgType());
+}
+
 #[post("/", format = "json", data = "<message>")]
 fn order_start_surface_grinder_cut(message: Json<SurfaceGrinderCutParams>, sender: State<Mutex<Sender<Message>>>) {
 	sender.lock().unwrap().send(Message::StartSurfaceGrinderCutMsgType(message.into_inner()));
@@ -43,6 +48,7 @@ pub fn init(sender: Sender<Message>) {
 			.mount("/", StaticFiles::from("html/dist/rust-grind"))
 			.mount("/api/moveAxisRel", routes![order_move_axis_rel])
 			.mount("/api/spindlePower", routes![order_spindle_power])
+			.mount("/api/startHoming", routes![order_start_homing])
 			.mount("/api/startSurfaceGrinderCut", routes![order_start_surface_grinder_cut])
 			.mount("/api/stop", routes![order_stop])
 			.launch();

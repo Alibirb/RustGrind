@@ -34,6 +34,9 @@ pub trait OperationController {
 	fn work_envelope(&self) -> &WorkEnvelope {
 		&self.operation_controller_data().work_envelope
 	}
+	fn work_envelope_mut(&mut self) -> &mut WorkEnvelope {
+		&mut self.operation_controller_data_mut().work_envelope
+	}
 
 	fn send_to_motor_control(&self, msg: Message) {
 		self.operation_controller_data().motor_control_sender.send(msg);
