@@ -225,10 +225,7 @@ impl StepperMotorController {
 
 type Num = f64;
 
-// Here's the converter that Stepper is going to use internally, to convert
-// from the computed delay value to timer ticks. Since we chose to use timer
-// ticks as the unit of time for velocity and acceleration, this conversion
-// is pretty simple (and cheap).
+// Converter for Stepper to convert from the computed delay value (in milliseconds) to timer ticks.
 pub struct DelayToTicks;
 impl motion_control::DelayToTicks<Num> for DelayToTicks {
 	type Ticks = <SysTimer as embedded_hal::timer::CountDown>::Time;
@@ -237,7 +234,8 @@ impl motion_control::DelayToTicks<Num> for DelayToTicks {
 	fn delay_to_ticks(&self, delay: Num)
 		-> Result<Self::Ticks, Self::Error>
 	{
-		let ticks = <SysTimer as embedded_hal::timer::CountDown>::Time::from_millis(delay as u64);
+		// Our delay is in fractional milliseconds, and we want as much precision as we can get, so we convert to nanoseconds.
+		let ticks = <SysTimer as embedded_hal::timer::CountDown>::Time::from_nanos((delay * 1_000_000.0).round() as u64);
 		Ok(ticks)
 	}
 }
