@@ -1,5 +1,15 @@
 button {
-	background-color: red;
-	font-weight: bold;
+	height: 8em;
+	width: 8em;
+	background-color: transparent;
+	background-image: url("/assets/Vienna_Convention_road_sign_B2a.svg");
+	background-repeat: no-repeat;
+	background-size: 100%;
+	border: none;
+	box-sizing: border-box;
+	color: transparent;    // hide the text, which is only included for accessibility.
 }
-// TODO: style as a stop sign?
+button:active {
+	// Provide some visual feedback when clicked
+	border: 0.5em transparent solid;    // invisible border to make the button slightly smaller
+}
