@@ -1,39 +1,24 @@
-<h1>{{title}}</h1>
+<header>
+	<div>
+		System Alerts
+	</div>
+	<div>
+		Current Op: ???????????<br/>
+		Progress: XX%<br/>
+		Time Remaining: XX:XX<br/>
+	</div>
 
-<app-move-axis-button [axis]="Axis.X" [distance]="-10"></app-move-axis-button>
-<app-move-axis-button [axis]="Axis.X" [distance]="-2"></app-move-axis-button>
-<app-move-axis-button [axis]="Axis.X" [distance]="2"></app-move-axis-button>
-<app-move-axis-button [axis]="Axis.X" [distance]="10"></app-move-axis-button>
+	<nav>
+		<ol>
+			<li><a routerLink="/manual-control">Manual Control</a></li>
+			<li><a routerLink="/surface-cut">Surface Cut</a></li>
+			<li><a>Configuration</a></li>
+		</ol>
+	</nav>
 
-<br/>
+	<app-stop-button></app-stop-button>
+</header>
 
-<app-move-axis-button [axis]="Axis.Y" [distance]="-10"></app-move-axis-button>
-<app-move-axis-button [axis]="Axis.Y" [distance]="-2"></app-move-axis-button>
-<app-move-axis-button [axis]="Axis.Y" [distance]="2"></app-move-axis-button>
-<app-move-axis-button [axis]="Axis.Y" [distance]="10"></app-move-axis-button>
-
-<br/>
-
-<app-move-axis-button [axis]="Axis.Z" [distance]="-10"></app-move-axis-button>
-<app-move-axis-button [axis]="Axis.Z" [distance]="-2"></app-move-axis-button>
-<app-move-axis-button [axis]="Axis.Z" [distance]="2"></app-move-axis-button>
-<app-move-axis-button [axis]="Axis.Z" [distance]="10"></app-move-axis-button>
-
-<br/>
-
-<app-spindle-control-button [power]="false"></app-spindle-control-button>
-<app-spindle-control-button [power]="true"></app-spindle-control-button>
-
-<br/>
-
-<app-stop-button></app-stop-button>
-
-<br/>
-
-<app-start-homing-button></app-start-homing-button>
-
-<br/>
-
-<app-surface-grinder-cut-params-form></app-surface-grinder-cut-params-form>
-
-<router-outlet></router-outlet>
+<main>
+	<router-outlet></router-outlet>
+</main>

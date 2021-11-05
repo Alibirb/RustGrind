@@ -1,0 +1,10 @@
+<app-move-axis-row [axis]="Axis.X"></app-move-axis-row>
+<app-move-axis-row [axis]="Axis.Y"></app-move-axis-row>
+<app-move-axis-row [axis]="Axis.Z"></app-move-axis-row>
+
+<!-- FIXME: would it be better to use a toggle button? -->
+<div class="spindle-control-buttons-container">
+	<app-spindle-control-button [power]="false"></app-spindle-control-button>
+	<app-spindle-control-button [power]="true"></app-spindle-control-button>
+</div>
+<app-start-homing-button></app-start-homing-button>

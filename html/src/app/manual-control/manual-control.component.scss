@@ -1,0 +1,12 @@
+:host {
+	display: grid;
+	grid-template-columns: repeat(5, auto);    // FIXME: play around with this and get it to distribute space better. At a certain aspect ratio, we get a bunch of space after Step Size and no space between the step and jog button groups
+	grid-gap: 0.5em;
+}
+
+
+.spindle-control-buttons-container {
+	display: inline-flex;
+	flex-direction: column;
+	grid-column: 1 / 3;    // FIXME: might be better to not have it in the grid at all?
+}

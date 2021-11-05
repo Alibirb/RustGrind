@@ -1,0 +1,16 @@
+form {
+	display: grid;
+	grid-template-columns: repeat(2, max-content) auto;
+	grid-column-gap: 0.5em;
+}
+
+.form-group {
+	display: contents;
+}
+.form-group > *:first-child {
+	grid-column: 1;
+}
+
+#start-cut-button {
+	grid-column: 1;
+}

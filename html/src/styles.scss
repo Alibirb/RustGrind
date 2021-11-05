@@ -1,7 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import url("normalize.css");
+
+
+
 h1 {
 	color: #369;
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 250%;
+}
+
+
+// form validation errors, maybe other stuff?
+// FIXME: rename if I have this just do form validation issues
+.alert-danger {
+	color: red;
+}
+
+
+// By default, <input> fields are made big enough to fit 20 characters.
+// For numeric inputs, we generally don't need that much.
+input[type="number"] {
+	width: 6em;
+}
+
+
+body {
+	// Adjust font size based on the viewport/screen size.
+	// Since "em" is based off font size, the whole GUI should scale nicely as long as we don't use absolute units like "pixels"
+	// By using vmin (minimum of viewport height and viewport width), we should react somewhat-decently to screens with odd aspect ratios rather than overflowing.
+	// However, we may need to scale it down further for portrait displays than for landscape since the GUI is designed around a landscape aspect ratio
+	// TODO: handle portrait displays better.
+	font-size: 4vmin;
 }

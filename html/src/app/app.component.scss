@@ -1,0 +1,58 @@
+// Basic page layout
+:host {
+	height: 100vh;    // take up all available vertical space
+	display: flex;
+	flex-direction: column;
+}
+main {
+	flex-grow: 1;
+}
+
+
+
+header {
+	display: grid;
+	grid-template-columns: 1fr 1fr min-content;
+	grid-template-rows: auto auto min-content;
+	grid-gap: 0.5em;
+
+	nav {
+		grid-row: 3;
+		grid-column: 1 / -2;    // span all columns except the last one
+	}
+
+	app-stop-button {
+		grid-row: 1/-1;        // span all rows
+		grid-column: -2/-1;    // last column
+	}
+}
+
+
+nav ol {
+	display: flex;
+	flex-wrap: wrap;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+
+	li {
+		border-left: 1px black solid;
+		border-right: 1px black solid;
+		display: inline-block;
+		flex-grow: 1;
+		a {
+			color: black;
+			font-size: larger;
+			text-decoration: none;
+
+			background-color: #9daebd;
+			box-sizing: border-box;
+			display: inline-block;
+			padding: 0.5em;
+			width: 100%;
+		}
+		a:hover {
+			background-color: lightblue;
+		}
+	}
+}
