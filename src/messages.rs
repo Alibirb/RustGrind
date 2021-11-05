@@ -48,6 +48,7 @@ pub struct EndstopHitMsg {
 pub struct GoToPositionMsg {
 	pub axis: Axis,
 	pub position: f64,
+	pub speed: f64,
 }
 
 /**
@@ -57,6 +58,7 @@ pub struct GoToPositionMsg {
 pub struct MoveAxisRelMsg {
 	pub axis: Axis,
 	pub distance: f64,
+	pub speed: f64,
 }
 
 #[derive(Copy, Clone)]

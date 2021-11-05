@@ -148,7 +148,7 @@ impl StepperMotorController {
 		)
 	}
 
-	pub fn start_move_rel(&mut self, distance: f64) -> Result<(), <Driver as MotionControl>::Error> {
+	pub fn start_move_rel(&mut self, distance: f64, speed: f64) -> Result<(), <Driver as MotionControl>::Error> {
 		// FIXME: handle reversed motor
 		// FIXME: handle too-small values: goes wrong direction if you put in min-i32
 		let target_step = self.driver.current_step() + self.config.inches_to_steps(distance);
@@ -160,10 +160,10 @@ impl StepperMotorController {
 			self.direction = AxisEnd::Max;
 		}
 		self.movement_in_progress = true;
-		self.driver.move_to_position(self.get_steps_per_millisecond(), target_step)
+		self.driver.move_to_position(self.ips_to_steps_per_millisecond(speed), target_step)
 	}
 
-	pub fn start_move_to(&mut self, position: f64) -> Result<(), <Driver as MotionControl>::Error> {
+	pub fn start_move_to(&mut self, position: f64, speed: f64) -> Result<(), <Driver as MotionControl>::Error> {
 		// FIXME: handle reversed motor
 		// FIXME: handle too-small values: goes wrong direction if you put in min-i32
 		let target_step = self.config.inches_to_steps(position);
@@ -177,12 +177,12 @@ impl StepperMotorController {
 			self.direction = AxisEnd::Max;
 		}
 		self.movement_in_progress = true;
-		self.driver.move_to_position(self.get_steps_per_millisecond(), target_step)
+		self.driver.move_to_position(self.ips_to_steps_per_millisecond(speed), target_step)
 	}
 
 	pub fn stop_move(&mut self) -> Result<(), <Driver as MotionControl>::Error> {
 		if self.movement_in_progress {
-			self.start_move_rel(0.0)?;
+			self.start_move_rel(0.0, 0.0)?;
 			self.movement_in_progress = false;
 		}
 		Ok(())
@@ -209,11 +209,6 @@ impl StepperMotorController {
 
 	pub fn is_movement_in_progress(&self) -> bool {
 		self.movement_in_progress
-	}
-
-	/// FIXME: should these be moved to config?
-	fn get_steps_per_millisecond(&self) -> f64 {
-		self.ips_to_steps_per_millisecond(self.config.default_speed_ips)
 	}
 
 	/// FIXME: should these be moved to config?
@@ -284,16 +279,16 @@ impl MotorsControl {
 		}
 	}
 
-	pub fn go_to_position(&mut self, axis : Axis, position : f64) {
+	pub fn go_to_position(&mut self, axis: Axis, position: f64, speed: f64) {
 		println!("Moving {:#?} to position {}", axis, position);
 		// FIXME: should not move if endstop is already hit; seems like we take a step or two to recognize it.
-		self.get_controller_mut(axis).start_move_to(position);
+		self.get_controller_mut(axis).start_move_to(position, speed);
 	}
 
-	pub fn move_relative(&mut self, axis : Axis, distance : f64) {
+	pub fn move_relative(&mut self, axis: Axis, distance: f64, speed: f64) {
 		println!("Moving {:#?} by {}", axis, distance);
 		// FIXME: should not move if endstop is already hit; seems like we take a step or two to recognize it.
-		self.get_controller_mut(axis).start_move_rel(distance);
+		self.get_controller_mut(axis).start_move_rel(distance, speed);
 	}
 
 	pub fn stop_all(&mut self) {
@@ -320,8 +315,8 @@ impl MotorsControl {
 	fn handle_message(&mut self, msg : Message) {
 		match msg {
 			Message::EndstopHitMsgType(eh_msg) => self.endstop_status_client.process_message(eh_msg),
-			Message::GoToPositionMsgType(gtp_msg) => self.go_to_position(gtp_msg.axis, gtp_msg.position),
-			Message::MoveAxisRelMsgType(mar_msg) => self.move_relative(mar_msg.axis, mar_msg.distance),
+			Message::GoToPositionMsgType(gtp_msg) => self.go_to_position(gtp_msg.axis, gtp_msg.position, gtp_msg.speed),
+			Message::MoveAxisRelMsgType(mar_msg) => self.move_relative(mar_msg.axis, mar_msg.distance, mar_msg.speed),
 			Message::SpindleControlMsgType(sc_msg) => self.set_spindle_on(sc_msg.on).unwrap(),
 			Message::StopMsgType() => self.stop_all(),
 

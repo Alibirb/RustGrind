@@ -22,6 +22,6 @@ export class MoveAxisRowComponent implements OnInit {
 	ngOnInit(): void {}
 
 	moveAxis(distance: number): void {
-		this.motorControlService.moveAxisRel(this.axis, distance).subscribe();
+		this.motorControlService.moveAxisRel(this.axis, distance, this.speed).subscribe();
 	}
 }

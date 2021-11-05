@@ -29,8 +29,8 @@ export class MotorControlService {
 
 	constructor(private http: HttpClient) { }
 
-	moveAxisRel(axis: Axis, distance: number) : Observable<any> {
-		let msg = new MoveAxisRelMsg(axis, distance);
+	moveAxisRel(axis: Axis, distance: number, speed: number) : Observable<any> {
+		let msg = new MoveAxisRelMsg(axis, distance, speed);
 		return this.http.post<MoveAxisRelMsg>(this.moveAxisRelUrl, msg, this.httpOptions)
 			.pipe(
 				catchError(this.handleError('moveAxisRel', msg))

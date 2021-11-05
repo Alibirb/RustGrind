@@ -82,9 +82,13 @@ impl HomingController {
 
 	fn move_towards_extent(&mut self, axis: Axis, end: AxisEnd) {
 		match end {
-			AxisEnd::Max => self.send_to_motor_control(Message::MoveAxisRelMsgType(MoveAxisRelMsg{axis, distance: 256.0})),
-			AxisEnd::Min => self.send_to_motor_control(Message::MoveAxisRelMsgType(MoveAxisRelMsg{axis, distance: -256.0})),
+			AxisEnd::Max => self.send_to_motor_control(Message::MoveAxisRelMsgType(MoveAxisRelMsg{axis, distance: 256.0, speed: self.get_homing_speed(axis)})),
+			AxisEnd::Min => self.send_to_motor_control(Message::MoveAxisRelMsgType(MoveAxisRelMsg{axis, distance: -256.0, speed: self.get_homing_speed(axis)})),
 		}
+	}
+
+	fn get_homing_speed(&self, axis: Axis) -> f64 {
+		self.config_client().config.motor_configs.get(&axis).unwrap().default_speed_ips
 	}
 }
 impl OperationController for HomingController {

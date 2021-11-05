@@ -142,11 +142,11 @@ impl SurfaceGrinderCutController {
 	}
 
 	fn move_to_position(&mut self, axis: Axis, position: f64) {
-		self.send_to_motor_control(Message::GoToPositionMsgType(GoToPositionMsg{axis, position}));
+		self.send_to_motor_control(Message::GoToPositionMsgType(GoToPositionMsg{axis, position, speed: self.cut_params.stroke_speed}));
 	}
 
 	fn move_relative(&mut self, axis: Axis, distance: f64) {
-		self.send_to_motor_control(Message::MoveAxisRelMsgType(MoveAxisRelMsg{axis, distance}));
+		self.send_to_motor_control(Message::MoveAxisRelMsgType(MoveAxisRelMsg{axis, distance, speed: self.cut_params.stroke_speed}));
 	}
 
 	fn handle_movement_complete(&mut self, msg: MovementCompleteMsg) {
