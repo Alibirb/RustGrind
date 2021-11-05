@@ -7,7 +7,6 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ManualControlComponent } from './manual-control/manual-control.component';
-import { MoveAxisButtonComponent } from './move-axis-button/move-axis-button.component';
 import { MoveAxisRowComponent } from './move-axis-row/move-axis-row.component';
 import { OnOffPipe } from './on-off.pipe';
 import { SpindleControlButtonComponent } from './spindle-control-button/spindle-control-button.component';
@@ -20,7 +19,6 @@ import { SurfaceGrinderCutParamsFormComponent } from './surface-grinder-cut-para
 	declarations: [
 		AppComponent,
 		ManualControlComponent,
-		MoveAxisButtonComponent,
 		MoveAxisRowComponent,
 		OnOffPipe,
 		SpindleControlButtonComponent,
